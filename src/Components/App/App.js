@@ -1,8 +1,9 @@
+import React from 'react';
 import './App.css';
+import AlertBox from '../AlertBox/AlertBox'
 import SearchBar from '../SearchBar/SearchBar'
 import SearchResults from '../SearchResults/SearchResults'
 import Playlist from '../Playlist/Playlist'
-import React from 'react';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -15,6 +16,19 @@ export default class App extends React.Component {
     this.state = {searchResults: tracksArray,
                   playlistName: '[as]',
                   playlistTracks: tracksArray};
+   
+   //bound functions
+   this.addTrack = this.addTrack.bind(this);
+
+  }
+
+  addTrack(newTrack) {
+    const currentTracks = this.state.playlistTracks;
+    currentTracks.forEach(track => {
+      track.id === newTrack.id ? <AlertBox/> : currentTracks.push(newTrack)
+    })
+    this.setState({playlistTracks: currentTracks})
+
   }
 
   render() {
@@ -25,7 +39,7 @@ export default class App extends React.Component {
         <SearchBar/>
         <div className="App-playlist">
           <SearchResults results={this.state.searchResults}/>
-          <Playlist name={this.state.playlistName} tracks={this.state.playlistTracks}/>
+          <Playlist name={this.state.playlistName} tracks={this.state.playlistTracks} addTrack={this.addTrack}/>
         </div>
       </div>
     </div>

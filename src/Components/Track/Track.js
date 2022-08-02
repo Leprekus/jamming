@@ -1,12 +1,19 @@
 import React from "react";
+import './Track.css'
 
 export default class Track extends React.Component {
     renderAction() {
         let isRemoval = true;
-        return <button className="Track-action">{isRemoval ? '-' : '+'}</button>
+        return isRemoval ? '-' : '+'
+    }
+    trackHandle() {
+        const addTrack = this.props.addTrack;
+        const id = this.props.trackData.id
+        return addTrack(id)
     }
 
     render() {
+
         const name = this.props.trackData.name;
         const artist = this.props.trackData.artist;
         const album = this.props.trackData.album;
@@ -16,7 +23,7 @@ export default class Track extends React.Component {
                         <h3>{name}</h3>
                         <p>{`${artist}, ${album}`}</p>
                 </div>
-                <button className="Track-action">{this.renderAction}</button>
+                <button className="Track-action" onClick={this.trackHandle}>{this.renderAction()}</button>
             </div>
         )
     }

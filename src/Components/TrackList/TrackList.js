@@ -1,4 +1,5 @@
 import React from "react";
+import Track from "../Track/Track";
 
 export default class TrackList extends React.Component {
     render() {
@@ -10,7 +11,7 @@ export default class TrackList extends React.Component {
             trackList = list.map((track) => {
                 return (
                 <li key={track.id}>
-                    {`${track.name}, ${track.artist}, ${track.album}`}
+                <Track trackData={track}/>
                 </li>
                        )
             });

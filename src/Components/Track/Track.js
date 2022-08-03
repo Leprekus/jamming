@@ -13,10 +13,10 @@ export default class Track extends React.Component {
     }
 
     render() {
-
-        const name = this.props.trackData.name;
-        const artist = this.props.trackData.artist;
-        const album = this.props.trackData.album;
+        const trackData = this.props.trackData;
+        const name = trackData.name;
+        const artist = trackData.artist;
+        const album = trackData.album;
         return(
             <div className="Track">
                 <div className="Track-information">

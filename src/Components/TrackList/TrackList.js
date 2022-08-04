@@ -5,12 +5,12 @@ import './TrackList.css'
 export default class TrackList extends React.Component {
        
     render() {
-        const tracks = this.props.tracks;
-        let trackList = tracks && tracks.length ?
-        (tracks.map((track) => {
+        let isRemoval = this.props.isRemoval;
+        let trackList = this.props.tracks && this.props.tracks.length ?
+        (this.props.tracks.map((track) => {
             return (
             <li key={track.id}>
-            <Track trackData={track} addTrack={this.props.addTrack}/>
+            <Track trackData={track} onAdd={this.props.onAdd}/>
             </li>
                     )
         })) : null

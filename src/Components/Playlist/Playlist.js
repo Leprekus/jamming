@@ -4,12 +4,11 @@ import './Playlist.css'
 
 export default class Playlist extends React.Component {
     render() {
-        const name = this.props.name ;
-        const tracks = this.props.tracks;
         return(
             <div className="Playlist">
-                <input value="New Playlist"/>
-                <TrackList tracks={this.props.tracks} addTrack={this.props.addTrack}/>
+                <input defaultValue={this.props.playlistName}/>
+                <TrackList tracks={this.props.tracks}/>
+
                 <button className="Playlist-save">SAVE TO SPOTIFY</button>
             </div>
         )

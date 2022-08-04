@@ -20,6 +20,7 @@ export default class App extends React.Component {
    
    //bound functions
    this.addTrack = this.addTrack.bind(this);
+   this.removeTrack = this.removeTrack.bind(this)
 
   }
 
@@ -37,11 +38,21 @@ export default class App extends React.Component {
   }
 
   removeTrack(delTrack) {
-    //if false delete track 
-    const isTrack = this.state.playlistTracks.every(track => track.id !== delTrack.id);
+    //check if track if in playlilst
+    //if track in playlist find index
+    //slice[index]
+    const index = this.tracksArray.forEach((track, index) => {
+      if(track.id === delTrack.id) {
+        return index
+      }
+    });
+    this.tracksArray.splice(index, 1)
+    this.setState({playlistTracks : this.tracksArray})
+
 
   }
-
+//isremoval is passed from search results to tracklist
+//isremoval is passed from playlist to tracklist
   render() {
     return (
     <div>
@@ -50,7 +61,7 @@ export default class App extends React.Component {
         <SearchBar/>
         <div className="App-playlist">
           <SearchResults results={this.state.searchResults} onAdd={this.addTrack}/>
-          <Playlist playlistName={this.state.playlistName} tracks={this.state.playlistTracks} />
+          <Playlist playlistName={this.state.playlistName} tracks={this.state.playlistTracks} onRemove={this.removeTrack}/>
         </div>
       </div>
     </div>

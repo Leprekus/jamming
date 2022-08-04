@@ -10,7 +10,12 @@ export default class TrackList extends React.Component {
         (this.props.tracks.map((track) => {
             return (
             <li key={track.id}>
-            <Track trackData={track} onAdd={this.props.onAdd}/>
+            <Track 
+            trackData={track} 
+            onAdd={this.props.onAdd}
+            onRemove={this.props.onRemove}
+            isRemoval={this.props.isRemoval}
+            />
             </li>
                     )
         })) : null

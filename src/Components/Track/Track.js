@@ -2,6 +2,7 @@ import React from "react";
 import './Track.css'
 
 export default class Track extends React.Component {
+    
     renderAction() {
         let isRemoval = true;
         return isRemoval ? '-' : '+'

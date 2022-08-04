@@ -10,12 +10,6 @@ export default class Playlist extends React.Component {
             <div className="Playlist">
                 <input value="New Playlist"/>
                 <TrackList tracks={this.props.tracks} addTrack={this.props.addTrack}/>
-                <ul>
-                {this.props.tracks.map(song => {
-                    return <li>{song.name + ' string'}</li>
-                })
-                    }
-                </ul>
                 <button className="Playlist-save">SAVE TO SPOTIFY</button>
             </div>
         )

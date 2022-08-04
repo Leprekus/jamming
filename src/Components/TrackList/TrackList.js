@@ -13,7 +13,7 @@ export default class TrackList extends React.Component {
             <Track trackData={track} addTrack={this.props.addTrack}/>
             </li>
                     )
-        })) : <li key='unknown'>Something went Wrong...</li>
+        })) : null
        
         
     

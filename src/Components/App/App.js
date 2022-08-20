@@ -4,6 +4,7 @@ import AlertBox from '../AlertBox/AlertBox'
 import SearchBar from '../SearchBar/SearchBar'
 import SearchResults from '../SearchResults/SearchResults'
 import Playlist from '../Playlist/Playlist'
+import Spotify from '../../util/Spotify';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -12,11 +13,11 @@ export default class App extends React.Component {
     const x = {id: 1, name:'Again', artist: 'Yui', album: 'Green Garden Pop'}
     const y = {id: 2, name:'Gurenge', artist: 'LiSa', album: 'Gurenge'}
     const z = {id: 3, name:'takt', artist: 'ryo', album: 'takt'}
-    
     this.tracksArray = [x, y, z]
     this.state = {searchResults: [a,x,y,z],
-                  playlistName: '[as]',
-                  playlistTracks: this.tracksArray};
+                  playlistName: 'New Playlist',
+                  playlistTracks: this.tracksArray,
+                };
    
    //bound functions
    this.addTrack = this.addTrack.bind(this);
@@ -24,6 +25,7 @@ export default class App extends React.Component {
    this.updatePlaylistName = this.updatePlaylistName.bind(this);
    this.savePlaylist = this.savePlaylist.bind(this);
    this.search = this.search.bind(this);
+
 
   }
 
@@ -66,10 +68,13 @@ savePlaylist() {
   return trackURIs;
 }
 
-search(searchTerm) {
-  console.log(searchTerm)
+async search(searchTerm) {
+  const results = await Spotify.search(searchTerm)
+  return (results.length && results instanceof Array ?
+          this.setState({searchResults: results})
+          : [])
  
-}
+} 
 
   render() {
     return (

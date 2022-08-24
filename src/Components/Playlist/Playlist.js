@@ -8,7 +8,7 @@ export default class Playlist extends React.Component {
         this.handleNameChange = this.handleNameChange.bind(this)
     }
     handleNameChange(e) {
-        const fieldValue = e.target.defaultValue
+        const fieldValue = e.target.value
         return this.props.onNameChange(fieldValue)
     }
 

@@ -9,12 +9,8 @@ import Spotify from '../../util/Spotify';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    const a = {id: 0, name:'someone', artist: 'is', album: 'Green'}
-    const x = {id: 1, name:'Again', artist: 'Yui', album: 'Green Garden Pop'}
-    const y = {id: 2, name:'Gurenge', artist: 'LiSa', album: 'Gurenge'}
-    const z = {id: 3, name:'takt', artist: 'ryo', album: 'takt'}
-    this.tracksArray = [x, y, z]
-    this.state = {searchResults: [a,x,y,z],
+    this.tracksArray = []
+    this.state = {searchResults: [],
                   playlistName: 'New Playlist',
                   playlistTracks: this.tracksArray,
                 };
@@ -60,12 +56,13 @@ export default class App extends React.Component {
 //isremoval is passed from playlist to tracklist
 
 updatePlaylistName(name) {
-  this.setState({playlistName: name})
+  return this.setState({playlistName: name})
 }
 
 savePlaylist() {
-  const trackURIs = this.state.playlistTracks.map(track => track);
-  return trackURIs;
+  //const trackURIs = this.state.playlistTracks.map(track => track);
+  const name = this.state.playlistName
+  return Spotify.savePlaylist(name, true);
 }
 
 async search(searchTerm) {

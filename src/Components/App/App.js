@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+//import './App.css';
 import AlertBox from '../AlertBox/AlertBox'
 import SearchBar from '../SearchBar/SearchBar'
 import SearchResults from '../SearchResults/SearchResults'
@@ -20,6 +20,7 @@ export default class App extends React.Component {
    this.removeTrack = this.removeTrack.bind(this);
    this.updatePlaylistName = this.updatePlaylistName.bind(this);
    this.savePlaylist = this.savePlaylist.bind(this);
+   this.resetPlaylist = this.resetPlaylist.bind(this)
    this.search = this.search.bind(this);
 
 
@@ -62,8 +63,8 @@ updatePlaylistName(name) {
 resetPlaylist() {
   return (
     this.setState({
-      playlistName: [``],
-      playlistTracks: []
+      playlistName: 'New Playlist',
+      playlistTracks:[]
     })
   )
 }
@@ -81,16 +82,29 @@ async search(searchTerm) {
           this.setState({searchResults: results})
           : [])
  
-} 
+}
+
+async searchPlaylist (searchTerm) {
+  const results = await Spotify.search(searchTerm)
+  return (results.length && results instanceof Array ?
+          this.setState({searchResults: results})
+          : [])
+}
 
   render() {
     return (
     <div>
       <h1>Ja<span className="highlight">mmm</span>ing</h1>
       <div className="App">
-        <SearchBar onSearch={this.search}/>
+        <SearchBar 
+        onSearch={this.search}
+        onSearchPlaylist={this.searchPlaylist}
+        />
         <div className="App-playlist">
-          <SearchResults results={this.state.searchResults} onAdd={this.addTrack}/>
+          <SearchResults 
+          results={this.state.searchResults}
+          onAdd={this.addTrack}
+          />
           <Playlist 
           playlistName={this.state.playlistName} 
           tracks={this.state.playlistTracks} 

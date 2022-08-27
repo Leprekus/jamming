@@ -59,10 +59,20 @@ updatePlaylistName(name) {
   return this.setState({playlistName: name})
 }
 
+resetPlaylist() {
+  return (
+    this.setState({
+      playlistName: [``],
+      playlistTracks: []
+    })
+  )
+}
+
 savePlaylist() {
-  //const trackURIs = this.state.playlistTracks.map(track => track);
   const name = this.state.playlistName
-  return Spotify.savePlaylist(name, true);
+  const trackUris = this.state.playlistTracks.map(track => track.uri)
+  Spotify.savePlaylist(name, trackUris)
+  return this.resetPlaylist()
 }
 
 async search(searchTerm) {

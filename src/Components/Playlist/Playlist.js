@@ -9,7 +9,7 @@ export default class Playlist extends React.Component {
     }
     handleNameChange(e) {
         const fieldValue = e.target.value
-        return this.props.onNameChange(fieldValue)
+        this.props.onNameChange(fieldValue)
     }
 
     render() {
